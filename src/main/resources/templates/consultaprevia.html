@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+  <head>  
+    <title>Consulta Previa</title>  
+    <style>
+      .username.ng-valid {
+          background-color: lightgreen;
+      }
+      .username.ng-dirty.ng-invalid-required {
+          background-color: red;
+      }
+      .username.ng-dirty.ng-invalid-minlength {
+          background-color: yellow;
+      }
+      .email.ng-valid {
+          background-color: lightgreen;
+      }
+      .email.ng-dirty.ng-invalid-required {
+          background-color: red;
+      }
+      .email.ng-dirty.ng-invalid-email {
+          background-color: yellow;
+      }
+    </style>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+	<link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" />
+  </head>
+  <body ng-app="myApp" class="ng-cloak">
+  		<form th:action="@{/logout}" method="get">
+			<button class="btn btn-md btn-danger btn-block" name="registration"
+				type="Submit">Salir</button>
+		</form>    
+      <div class="generic-container" ng-controller="ConsultaController as ctrl">
+          <div class="panel panel-default">
+              <div class="panel-heading"><span class="lead">Registro de Consulta Previa</span></div>
+              <div class="formcontainer">
+                  <form ng-submit="ctrl.submit()" name="myForm" class="form-horizontal">
+                      <input type="hidden" ng-model="ctrl.consulta.id" />
+                      
+                      <!-- Cabecera -->
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Identificador del Mensaje</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.identificadorMensaje" name="identificadorMensaje" class="username form-control input-sm" placeholder="Ingrese identificador del mensaje" required="" ng-minlength="17"/>
+                                  <div class="has-error" ng-show="myForm.$dirty">
+                                      <span ng-show="myForm.uname.$error.required">Esto es un campo requerido</span>
+                                      <span ng-show="myForm.uname.$error.minlength">Longitud minima requerida 3</span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                        
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Remitente</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.remitente" class="form-control input-sm" placeholder="Ingrese remitente."/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Destinatario</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.destinatario" class="form-control input-sm" placeholder="Ingrese destinatario."/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                       <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Fecha Creacion Mensaje</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.fechaCreacionMensaje" class="form-control input-sm" placeholder="Ingrese fecha de creacion del mensaje"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Identificador del proceso</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.identificadorProceso" class="form-control input-sm" placeholder="Ingrese identificador del proceso"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <!-- Cuerpo -->
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">ID. Mensaje</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.idMensaje" class="form-control input-sm" placeholder="Ingrese ID. mensaje"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Codigo del Receptor</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.codigoReceptor" class="form-control input-sm" placeholder="Ingrese Codigo del Receptor"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Codigo del Cedente</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.codigoCedente" class="form-control input-sm" placeholder="Ingrese Codigo del Cedente"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Tipo de Documento de Identidad</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.tipoDocumentoIdentidad" class="form-control input-sm" placeholder="Ingrese Tipo de documento de identidad"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Numero de Documento de Identidad</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.numeroDocumentoIdentidad" class="form-control input-sm" placeholder="Ingrese Numero de documento de identidad"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Cantidad de Numeraciones</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.cantidadNumeraciones" class="form-control input-sm" placeholder="Ingrese Cantidad de Numeraciones"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Observaciones</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.observaciones" class="form-control input-sm" placeholder="Ingrese Observaciones"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Nombre del contacto</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.nombreContacto" class="form-control input-sm" placeholder="Ingrese nombre del contacto"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Email del contacto</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.emailContacto" class="form-control input-sm" placeholder="Ingrese email del contacto"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                       <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Telefono del contacto</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.telefonoContacto" class="form-control input-sm" placeholder="Ingrese telefono del contacto"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                       <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Fax del contacto</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.faxContacto" class="form-control input-sm" placeholder="Ingrese fax del contacto"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Tipo de Servicio</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.tipoServicio" class="form-control input-sm" placeholder="Ingrese Tipo de Servicio"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                       <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">cliente</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.cliente" class="form-control input-sm" placeholder="Ingrese Cliente"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+					<!-- Numeracion solicitada -->
+
+					  <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Inicio de Rango</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.inicioRango" class="form-control input-sm" placeholder="Ingrese Inicio Rango"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Final de Rango</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.finalRango" class="form-control input-sm" placeholder="Ingrese Final Rango"/>
+                              </div>
+                          </div>
+                      </div>
+                      
+                      <div class="row">
+                          <div class="form-group col-md-12">
+                              <label class="col-md-2 control-lable" for="file">Tipo de portabilidad</label>
+                              <div class="col-md-7">
+                                  <input type="text" ng-model="ctrl.consulta.tipoPortabilidad" class="form-control input-sm" placeholder="Ingrese Tipo de Portabilidad"/>
+                              </div>
+                          </div>
+                      </div>
+
+
+                       <div class="row">
+                          <div class="form-actions floatRight">
+                              <input type="submit"  value="{{!ctrl.consulta.id ? 'Add' : 'Update'}}" class="btn btn-primary btn-sm" ng-disabled="myForm.$invalid" />
+                              <button type="button" ng-click="ctrl.reset()" class="btn btn-warning btn-sm" ng-disabled="myForm.$pristine">Reset Form</button>
+                          </div>
+                      </div>
+                  </form>
+              </div>
+          </div>
+          
+          <!-- lista -->
+           <div class="panel panel-default" style="display: none;">
+                Default panel contents
+              <div class="panel-heading"><span class="lead">Lista de Consulta Previa </span></div>
+              <div class="tablecontainer">
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <th>ID.</th>
+                              <th>Identificador Mensaje</th>
+                              <th>Remitente</th>
+                              <th>Destinatario</th>
+                              <th>Fecha de creacion mensaje</th>
+                              <th>Indentificador Proceso</th>
+                              
+                              <th>ID. Mensaje</th>
+                              <th>Codigo del Receptor</th>
+                              <th>Codigo del Cedente</th>
+                              <th>Tipo de Documento de Identidad</th>
+                              <th>Numero de Documento de Identidad</th>
+                              <th>Cantidad de Numeraciones</th>
+                              
+                              <th>Observaciones</th>
+                              <th>Nombre del Contacto</th>
+                              <th>Email del Contacto</th>
+                              <th>Telefono de Contacto</th>
+                              <th>Fax de Contacto</th>
+                              <th>Tipo de Servicio</th>
+                              <th>Cliente</th>
+                              
+                              <th>Inicio de Rango</th>
+                              <th>Final de Rango</th>
+                              <th>Tipo de Portabilidad</th>
+                              
+                              
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr ng-repeat="u in ctrl.consultas">
+                              <td><span ng-bind="u.id"></span></td>
+                              <td><span ng-bind="u.identificadorMensaje"></span></td>
+                              <td><span ng-bind="u.remitente"></span></td>
+                              <td><span ng-bind="u.destinatario"></span></td>
+                              <td><span ng-bind="u.fechaCreacionMensaje"></span></td>
+                              <td><span ng-bind="u.identificadorProceso"></span></td>
+                              
+                              <td><span ng-bind="u.idMensaje"></span></td>
+                              <td><span ng-bind="u.codigoReceptor"></span></td>
+                              <td><span ng-bind="u.codigoCedente"></span></td>
+                              <td><span ng-bind="u.tipoDocumentoIdentidad"></span></td>
+                              <td><span ng-bind="u.numeroDocumentoIdentidad"></span></td>
+                              <td><span ng-bind="u.cantidadNumeraciones"></span></td>
+                              
+                              <td><span ng-bind="u.observaciones"></span></td>
+                              <td><span ng-bind="u.nombreContacto"></span></td>
+                              <td><span ng-bind="u.emailContacto"></span></td>
+                              <td><span ng-bind="u.telefonoContacto"></span></td>
+                              <td><span ng-bind="u.faxContacto"></span></td>
+                              <td><span ng-bind="u.tipoServicio"></span></td>
+                              <td><span ng-bind="u.cliente"></span></td>
+                              
+                              <td><span ng-bind="u.inicioRango"></span></td>
+                              <td><span ng-bind="u.finalRango"></span></td>
+                              <td><span ng-bind="u.tipoPortabilidad"></span></td>
+                              
+                              <td>
+                              <button type="button" ng-click="ctrl.edit(u.id)" class="btn btn-success custom-width">Actualizar</button>  
+                              <button type="button" ng-click="ctrl.remove(u.id)" class="btn btn-danger custom-width">Eliminar</button>
+                              </td>
+                          </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div> 
+      </div>
+      
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+  	<script src="js/app.js"></script>
+  	<script src="js/service/consulta_service.js"></script>
+  	<script src="js/controller/consulta_controller.js"></script>
+  </body>
+</html>
